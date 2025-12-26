@@ -1,4 +1,4 @@
-hostname router2
+hostname router7
 !
 line con 0
  logging sync
@@ -19,5 +19,8 @@ line vty 0 7
  transport preferred none
 !
 int lo0
- ip address 10.0.0.2 255.255.255.255
+ ip address 10.0.0.7 255.255.255.255
  no shut
+!
+end
+copy run start

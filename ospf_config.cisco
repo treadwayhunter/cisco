@@ -1,0 +1,15 @@
+router ospf 10
+ passive-interface default
+ no passive-interface loopback0
+ no passive-interface GigabitEthernet0/0
+ no passive-interface GigabitEthernet0/1
+ router-id {{ ROUTER_ID }}
+!
+int loopback0
+ ip ospf 10 area 0
+!
+int range GigabitEthernet0/0-1
+ ip ospf network point-to-point
+ ip ospf 10 area 0
+!
+
