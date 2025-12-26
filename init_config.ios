@@ -1,0 +1,23 @@
+hostname router2
+!
+line con 0
+ logging sync
+!
+username treadwayh secret 0 password
+enable secret 0 password
+ip domain-name huntertreadway.com
+crypto key generate rsa modulus 2048
+ip ssh version 2
+!
+line con 0
+ login local
+!
+line vty 0 7
+ login local
+ transport output ssh
+ transport input ssh
+ transport preferred none
+!
+int lo0
+ ip address 10.0.0.2 255.255.255.255
+ no shut
