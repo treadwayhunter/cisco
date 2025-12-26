@@ -1,10 +1,10 @@
-hostname router7
+hostname {{ HOSTNAME }}
 !
 line con 0
  logging sync
 !
-username treadwayh secret 0 password
-enable secret 0 password
+username treadwayh secret 0 {{ USER_PASSWORD }}
+enable secret 0 {{ USER_PASSWORD }}
 ip domain-name huntertreadway.com
 crypto key generate rsa modulus 2048
 ip ssh version 2
@@ -19,7 +19,7 @@ line vty 0 7
  transport preferred none
 !
 int lo0
- ip address 10.0.0.7 255.255.255.255
+ ip address {{ LOOPBACK_ADDR }} 255.255.255.255
  no shut
 !
 end
