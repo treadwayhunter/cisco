@@ -44,3 +44,18 @@ policy-map copp-policy
 !  CONTROL PLANE
 control-plane
  service-policy input copp-policy
+
+! Protocols I might want to implement
+! STP
+! LACP / PAgP
+! CDP / LLDP
+! UDLD?
+! ARP / NDP / ICMPv6
+! FHRP
+! DHCP relay
+
+! Possibly DNS in the future
+! TACACS, RADIUS
+! syslog
+! NETCONF (TCP 830)
+! ICMP needs cleaning
