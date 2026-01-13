@@ -1,0 +1,46 @@
+! copp practice
+! version 1.0
+! January 13, 2026
+
+
+! ACLs
+ip access-list extended COPP_ICMP
+ permit icmp any any
+!
+ip access-list extended COPP_MGMT
+ permit tcp any any eq 22
+ permit tcp any any eq telnet
+ permit udp any any eq snmp
+ permit tcp any any eq www
+ permit tcp any any eq 443
+!
+ip access-list extended COPP_ROUTING
+ permit ospf any any
+ permit eigrp any any
+ permit tcp any any eq bgp
+!
+
+! CLASS MAPS
+class-map match-any control-routing
+ match access-group name COPP_ROUTING
+!
+class-map match-any control-mgmt
+ match access-group name COPP_MGMT
+!
+class-map match-any control-icmp
+ match access-group name COPP_ICMP
+!
+
+! POLICY MAPS
+policy-map copp-policy
+ class control-routing
+  police 32000 conform-action transmit  exceed-action drop 
+ class control-mgmt
+  police 64000 conform-action transmit  exceed-action drop 
+ class control-icmp
+  police 32000 conform-action transmit  exceed-action drop
+ class class-default
+  police 8000 conform-action transmit  exceed-action drop 
+!  CONTROL PLANE
+control-plane
+ service-policy input copp-policy
