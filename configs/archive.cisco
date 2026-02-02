@@ -1,0 +1,6 @@
+!
+archive
+ path flash:
+ maximum 5
+ write-memory
+!

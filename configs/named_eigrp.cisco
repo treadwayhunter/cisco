@@ -1,0 +1,16 @@
+conf terminal revert timer 30
+!
+router eigrp MY_EIGRP
+ address-family ipv4 unicast autonomous-system 10
+  af-interface default
+   passive-interface
+  exit-af-interface
+  af-interface Gi0/0
+   no passive-interface
+  !af-interface Gi0/1
+   !no passive-interface   
+  !exit-af-interface
+  !network 10.0.0.0 0.0.0.3
+  network 10.0.0.4 0.0.0.3
+  network 3.3.3.3 0.0.0.0
+
