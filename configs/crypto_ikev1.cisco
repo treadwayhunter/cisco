@@ -1,0 +1,23 @@
+ip access-list extended IPSEC_ACL
+    permit gre any any
+    ! this is kind of cheesy, but it works
+    ! it would be better to actually do it between the tunnel endpoints
+!
+crypto isakmp policy 10
+    encryption aes 256
+    hash sha512
+    authentication pre-share
+    group 14
+!
+crypto isakmp key cisco123 address 10.0.0.6
+!
+crypto ipsec transform-set TRANSFORM_SET esp-aes 256 esp-sha-hmac
+    mode tunnel
+!
+crypto map IPSEC_MAP 10 ipsec-isakmp
+    set peer 10.0.0.6
+    set transform-set TRANSFORM_SET
+    match address IPSEC_ACL
+!
+interface Gi0/0
+    crypto map IPSEC_MAP
