@@ -1,5 +1,5 @@
 ip access-list extended IPSEC_ACL
-    permit gre any any
+    permit gre host 10.0.0.1 host 10.0.0.6
     ! this is kind of cheesy, but it works
     ! it would be better to actually do it between the tunnel endpoints
 !
